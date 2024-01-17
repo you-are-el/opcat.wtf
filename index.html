@@ -21,30 +21,37 @@
 
     <div class="window">
         <div class="title-bar">
-            <div class="title-bar-text">WTF is OP_CAT?</div>
+            <div class="title-bar-text">OP_CAT Setup Wizard</div>
         </div>
         <div class="window-body">
             <div id="window1" class="content-window">
-                <h3>Under Construction</h3>
-                <p>We are currently building an interactive user experience to teach people about OP_CAT.</p>
-                <p>In the meantime, if you want to join the project, you can apply for <strong>your very own subdomain (yourname.opcat.wtf)</strong> to point to your content that you are creating for quest 4. If you use a subdomain, we will include your content on this website for the best collection of OP_CAT content. Visit the link in the taskbar below to apply for your personal subdomain and start sharing your insights on OP_CAT!</p>
-                <!-- <p>If you want to install some knowledge about OP_CAT into your brain, go and click the button below</p> -->
-                <p>Join our <a href="https://discord.com/channels/1069807785283428373/1196943037524353065" target="_blank">Discord</a> (only accessible to Team Alive)</p>
-                <p>Follow me on X <a href="https://twitter.com/you_are_el" target="_blank">@you_are_el</a> and please tag me if you use a subdomain or the website in any way.</p>
-                <p>#wtfisopcat #opcat.wtf #StayinAlive #OP_CAT_IS ALIVE</p>
+                <h2>What the f*ck is OP_CAT</h2>
+                <p>Welcome.</p>
+                <p>This programm will install <strong>KNOWLEDGE ABOUT OP_CAT</strong> on your local hard drive.</p>
+                <p>It is strongly recommended that you close all other applications you have running before you continue. This will help prevent any doubters of OP_CAT to influence you during the installation process.</p>
+                <p>If you are not in the mood for learning somehting, we also have other fun things for you to do here. For exmaple, you can apply for <strong>your very own 
+                    subdomain (yourname.opcat.wtf)</strong> to point to your content that you are creating for quest 4. If you use a subdomain, we will include your content on this 
+                    website under Resources for the best collection of OP_CAT content. Visit the link in the taskbar below to apply for your personal subdomain and start sharing your insights on OP_CAT!
+                </p>
+                <p>However, if you are read to learn about all about OP_CAT, click Install OP_CAT to continue.</p>
+
+                <!-- Buttons -->
+                <div class="button-container">
+                    <button onclick="nextWindow()">Install OP_CAT</button>
+                </div>
             </div>
-            <div id="window2" class="content-window" style="display: none;">
-                <h1>What is OP_CAT?</h1>
-                <p>Detailed explanation of OP_CAT...</p>
-            </div>
-            <div id="window3" class="content-window" style="display: none;">
-                <h1>Examples of OP_CAT</h1>
-                <p>Here are some examples...</p>
+            <div id="window2" class="content-window hidden">
+                <h2>Under Construction</h2>
+                <p>We are currently building the educational resources for this magical setup wizard.</p>
+                <p>Check out the About page to learn more.</p>
+
+                <!-- Buttons -->
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="nextWindow()">Next &gt;</button>
+                </div>
             </div>
             <!-- Add more content windows as needed -->
-        </div>
-        <div class="status-bar">
-            <!-- <button onclick="nextWindow()">Instal OP_CAT</button> -->
         </div>
     </div>
 

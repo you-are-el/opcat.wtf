@@ -50,9 +50,13 @@ body {
     max-width: 600px;
     max-height: 600px;
     margin: auto;
-    font-size: medium;
+    font-size: small;
     display: flex; /* Use flexbox */
     flex-direction: column; /* Stack children vertically */
+}
+
+.hidden {
+    display: none !important;
 }
 
 .window-body {
@@ -61,12 +65,20 @@ body {
     padding: 10px; /* Adjust padding as needed */
 }
 
-.status-bar {
-    padding: 10px;
-    text-align: right;
-    /* Ensure the status bar doesn't shrink */
-    flex-shrink: 0;
+.content-window {
+    display: flex; /* Use Flexbox */
+    flex-direction: column; /* Stack children vertically */
+    height: 100%; /* Ensure it takes full height of its parent */
+    justify-content: flex-start; /* Align content to the start */
 }
+
+.button-container {
+    margin-top: auto; /* Pushes the button to the bottom */
+    text-align: right; /* Align button to the right */
+    padding-top: 15px; /* Padding around the button */
+    border-top: #adadad 2px solid; /* Top border as separator */
+}
+
 
 @media screen and (min-width: 600px) {
     .window {
