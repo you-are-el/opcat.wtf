@@ -1,0 +1,90 @@
+body {
+    font-family: 'MS Sans Serif', sans-serif;
+    background-color: teal;
+    margin:
+    0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 50px); /* Subtract the height of the taskbar */
+    padding-bottom: 50px;
+}
+
+.taskbar {
+    background-color: #c8c4c4;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+
+.start-button button {
+    background-color: #C0C0C0;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 20px;
+    font-family: 'MS Sans Serif', sans-serif;
+    cursor: pointer;
+}
+
+.taskbar-links a {
+    color: #000000;
+    text-decoration: none;
+    margin-right: 20px;
+    font-family: 'MS Sans Serif', sans-serif;
+}
+
+.taskbar-links a:hover {
+    text-decoration: underline;
+}
+
+.window {
+    width: 600px;
+    height: 600px;
+    max-width: 600px;
+    max-height: 600px;
+    margin: auto;
+    font-size: medium;
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack children vertically */
+}
+
+.window-body {
+    flex-grow: 1; /* Allow the content area to expand */
+    overflow-y: auto; /* Add scroll to the content area if necessary */
+    padding: 10px; /* Adjust padding as needed */
+}
+
+.status-bar {
+    padding: 10px;
+    text-align: right;
+    /* Ensure the status bar doesn't shrink */
+    flex-shrink: 0;
+}
+
+@media screen and (min-width: 600px) {
+    .window {
+    max-width: 600px;
+    }
+}
+@media screen and (max-width: 599px) {
+    .window {
+        width: calc(100% - 20px); /* Adjust the width to allow for margins */
+        height: calc(100vh - 70px); /* Adjust height for smaller screens */
+        margin: 10px; /* Add a small margin around the window */
+        max-width: none;
+        max-height: none;
+    }
+
+    body {
+        justify-content: flex-start; /* Align to the top on smaller screens */
+        padding-top: 10px; /* Add padding at the top */
+        height: calc(100vh - 60px); /* Subtract the height of the taskbar */
+    }
+}
