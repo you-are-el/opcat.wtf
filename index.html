@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What The F*ck is OP_CAT?</title>
-    <link rel="stylesheet" href="https://jdan.github.io/98.css/98.css">
+    <link rel="stylesheet" href="local_style.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,34 +25,266 @@
         </div>
         <div class="window-body">
             <div id="window1" class="content-window">
-                <h2>What the f*ck is OP_CAT</h2>
-                <p>Welcome.</p>
-                <p>This program will install <strong>KNOWLEDGE ABOUT OP_CAT</strong> on your local hard drive.</p>
-                <p>It is strongly recommended that you close all other applications you have running before you continue. This will help prevent any doubters of OP_CAT to influence you during the installation process.</p>
-                <p>If you are not in the mood for learning something, we also have other fun things for you to do here. For example, you can apply for <strong>your very own 
-                    subdomain (yourname.opcat.wtf)</strong> to point to your content that you are creating for quest 4. If you use a subdomain, we will include your content on this 
-                    website under Resources for the best collection of OP_CAT content. Visit the link in the taskbar below to apply for your personal subdomain and start sharing your insights on OP_CAT!
-                </p>
-                <p>However, if you are ready to learn all about OP_CAT, click Install OP_CAT to continue.</p>
-
-                <!-- Buttons -->
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text">What the f*ck is OP_CAT?</p>
+                </div>
+                <div class="text-column">
+                    <p>Welcome.</p>
+                    <p>This module is designed to boost your human hard drive with insights about OP_CAT in Bitcoin's scripting language.</p>
+                    <p>To maximize your system's efficiency, it's a good idea to close other applications. This helps in dedicating more memory to processing new information.</p>
+                    <p>If your system freezes during the installation process, exiting and restarting the session (closing and reopening the browser tab) should resolve the issue.</p>
+                    <p>Click 'Install OP_CAT' to upload this knowledge to your human memory.</p>
+                </div>
                 <div class="button-container">
                     <button onclick="nextWindow()">Install OP_CAT</button>
                 </div>
             </div>
-            <div id="window2" class="content-window hidden">
-                <h2>Under Construction</h2>
-                <p>We are currently building the educational resources for this magical setup wizard.</p>
-                <p>Check out the About page to learn more.</p>
 
-                <!-- Buttons -->
+            <div id="window2" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text">Understanding OP_CAT</p>
+                </div>
+                <div class="text-column">
+                    <p>
+                        OP_CAT is an opcode within the Bitcoin scripting language. Bitcoin scripts, comprising a sequence of opcodes, 
+                        define the conditions for transactions to be valid and added to the blockchain.
+                    </p>
+                    <p><strong>What is an OP_Code?</strong></p>
+                    <p>
+                        An OP_Code (operation code) is a command in Bitcoin's scripting language that executes specific operations. 
+                        These include arithmetic processes, data manipulation, and criteria for transaction validation.
+                    </p>
+                    <p><strong>Function of OP_CAT:</strong></p>
+                    <p>
+                        OP_CAT is utilized for concatenation. It combines the top two items from the script's stack into one. For example, 
+                        if "abc" and "123" are at the top of the stack, OP_CAT concatenates them to form "abc123".
+                    </p>    
+                </div>
                 <div class="button-container">
                     <button onclick="previousWindow()">&lt; Back</button>
                     <button onclick="nextWindow()">Next &gt;</button>
                 </div>
             </div>
-            <!-- Add more content windows as needed -->
-        </div>
+
+            <div id="window3" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text">OP_CAT in Action</p>
+                </div>
+                <div class="text-column">
+                    <p id="explanation-text">
+                        Below is a simulated Bitcoin stack. Currently, the top two items on the stack are the strings 
+                        "abc" and "123". This interactive demo allows you to execute the OP_CAT opcode and see its effect on these stack items.
+                    </p>
+                    <p>Press 'OP_CAT' to concatenate "abc" and "123" into a single item on the stack.</p>
+                    <div class="stack-controls">
+                        <button id="cat-button-1" onclick="concatenateTopTwo()">OP_CAT</button>
+                    </div>
+                    <div class="bitcoin-stack" id="bitcoin-stack-1"></div>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="nextWindow()">Next &gt;</button>
+                </div>
+            </div>
+            
+
+            <div id="window4" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text">Deactivation of OP_CAT</p>
+                </div>
+                <div class="text-column">
+                    <p>
+                        In Bitcoin's early development, OP_CAT was an active opcode. However, in 2010, developers chose to disable it, primarily due to security concerns.
+                    </p>
+                    <p>
+                        The key issue with OP_CAT was its capability to create stack elements of exponentially increasing size in relation to the size of the script itself. 
+                        Such functionality posed a significant threat to the network's stability. Scripts utilizing OP_CAT could potentially generate transactions that were 
+                        very large or complex, thereby causing network performance issues like slowdowns.
+                    </p>
+                    <p>
+                        This concern was especially relevant when OP_CAT was used in combination with OP_DUP, an opcode that duplicates the top item on the stack. For instance, if 'X' is at the top of 
+                        the stack, executing OP_DUP would result in two 'X's on top of the stack, doubling the data with each execution in combination with OP_CAT.
+                    </p>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="nextWindow()">Next &gt;</button>
+                </div>
+            </div>            
+
+            <div id="window5" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text">OP_DUP in Action</p>
+                </div>
+                <div class="text-column">
+                    <p id="explanation-text">
+                        This interactive section features another Bitcoin stack with a single item "X" at the top. Experience firsthand how the OP_DUP opcode functions within the Bitcoin scripting environment.
+                    </p>
+                    <p>Press 'OP_DUP' to see how it duplicates the top item on the stack, effectively doubling "X".</p>
+                    <div class="stack-controls">
+                        <button id="dup-button-2" onclick="duplicateTop()">OP_DUP</button>
+                    </div>
+                    <div class="bitcoin-stack" id="bitcoin-stack-2"></div>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="nextWindow()">Next &gt;</button>
+                </div>
+            </div>
+            
+
+            <div id="window6" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text">DUP CAT DUB CAT BOOM</p>
+                </div>
+                <div class="text-column">
+                    <p id="explanation-text">
+                        In this interactive demonstration, you'll see how the combination of OP_CAT and OP_DUP can 
+                        lead to rapidly growing stack sizes. Such growth mirrors the concerns in Bitcoin scripting, 
+                        where it could significantly slow down or even halt node processing.
+                        <br><br>
+                        Use 'OP_DUP' to duplicate the top item on the stack and 'OP_CAT' to concatenate the top two items. 
+                        Please proceed with caution; repeatedly executing these operations in this simulation can cause 
+                        similar slowdowns or freezing in your browser, reflecting the real-world impact this would have on an actual Bitcoin node.
+                    </p>
+                    <div class="stack-controls">
+                        <button id="dup-button-3" onclick="duplicateTop()">OP_DUP</button>
+                        <button id="cat-button-3" onclick="concatenateTopTwo()">OP_CAT</button>
+                    </div>
+                    <div class="bitcoin-stack" id="bitcoin-stack-3"></div>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="nextWindow()">Next &gt;</button>
+                </div>
+            </div>
+
+            <div id="window7" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text">Tapscript to the Rescue
+                    </p>
+                </div>
+                <div class="text-column">
+                    <p>
+                        Tapscript, an integral component of the Bitcoin Taproot upgrade (which went into effect in 2021), offers a crucial enhancement to the Bitcoin protocol. 
+                        While Taproot itself is a broader upgrade improving Bitcoin's privacy and efficiency, Tapscript specifically addresses script execution and security.
+                    </p>
+                    <p>
+                        One significant feature of Tapscript is the enforcement of a maximum size limit for stack elements — capped at 520 bytes. 
+                        This limit is crucial in addressing the issues associated with OP_CAT. By restricting the size of each stack element, 
+                        the creation of excessively large and potentially problematic stack elements is effectively prevented, ensuring more 
+                        robust script execution and network stability.
+                    </p>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="startInstallation(event)">Upgrade to Taproot</button>
+                </div>
+                <!-- Pop-up structure using 98.css styles -->
+                <div id="popup-installation" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Taproot Wizard</div>
+                    </div>
+                    <div class="window-body">
+                        <p>Installing Taproot...</p>
+                        <div id="installation-bar-container">
+                            <div id="installation-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="window8" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text">DUP CAT DUB CAT not BOOM?</p>
+                </div>
+                <div class="text-column">
+                    <p id="explanation-text">
+                        While OP_CAT remains disabled in Bitcoin scripting, the Tapscript upgrade, with its 520-byte size limit, provides a framework for how OP_CAT could be reintroduced safely in the future.
+                        <br><br>
+                        For demonstration, let's explore a simulated environment where you can use OP_CAT in conjunction with OP_DUP, without the risk of creating an oversized stack. Tapscript's size limit is applied here to prevent excessive growth.
+                    </p>
+                    <div class="stack-controls">
+                        <button id="dup-button-4" onclick="duplicateTop()">OP_DUP</button>
+                        <button id="cat-button-4" onclick="concatenateTopTwo()">OP_CAT</button>
+                    </div>
+                    <div class="bitcoin-stack" id="bitcoin-stack-4"></div>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="nextWindow()">Next &gt;</button>
+                </div>
+                <div id="error-popup" class="window">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Error</div>
+                    </div>
+                    <div class="window-body" style="text-align: center;">
+                        <p>Error executing OP_CAT: Resulting item exceeds the 520-byte limit.</p>
+                        <div style="margin-top: 20px;">
+                            <button onclick="closeErrorPopup()">OK</button>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
+            <div id="window9" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text">The Potential Reintroduction of OP_CAT</p>
+                </div>
+                <div class="text-column">
+                    <p>
+                        With the security concerns addressed by Tapscript, the question arises: 
+                        Why might we consider reintroducing OP_CAT?
+                    </p>
+                    <p>
+                        OP_CAT holds significant utility for Bitcoin developers. 
+                        It enables the creation of more intricate scripts, paving the way for advanced applications on the Bitcoin network, such as covenant contracts.
+                    </p>
+                    <p>
+                        Covenant contracts are a type of smart contract that facilitate complex 
+                        transaction conditions. For instance, they can be designed to allow spending of Bitcoins only under specific conditions, like if Bitcoin's price crosses a predetermined threshold.
+                    </p>
+                    <p>
+                        This concludes the OP_CAT setup wizard. You've gained insights into opcodes, 
+                        specifically OP_CAT and OP_DUP, the deactivation of OP_CAT, and how Tapscript aims 
+                        to mitigate related risks. The future reactivation of OP_CAT remains a topic of discussion. 
+                        Armed with this knowledge, you're now equipped to contribute meaningfully to the ongoing dialogue about Bitcoin's evolution.
+                    </p>
+                    <p>Click 'Finish' to restart the setup wizard and reinforce your understanding.</p>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="reload_browser()">Finish</button>
+                </div>
+            </div>
+            
     </div>
 
     <script src="script.js"></script>

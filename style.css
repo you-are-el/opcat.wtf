@@ -1,8 +1,6 @@
 body {
-    font-family: 'MS Sans Serif', sans-serif;
     background-color: teal;
-    margin:
-    0;
+    margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -10,6 +8,42 @@ body {
     height: calc(100vh - 50px); /* Subtract the height of the taskbar */
     padding-bottom: 50px;
 }
+
+/* Change later in the other css file */
+.title-bar {
+    background-image: none;
+    background-color: #00037D !important;
+}
+
+.window-flex-container {
+    display: flex;
+}
+
+.header-row {
+    display: flex;
+    align-items: flex-start;
+}
+
+.icon-column {
+    flex: 0 0 50px; /* Adjust the width as necessary */
+    display: flex;
+    justify-content: center; /* Center the icon horizontally */
+}
+
+.icon {
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+}
+
+.header-text {
+    /* Additional styling as needed */
+    margin-left: 10px; /* Space between icon and header text */
+}
+
+.text-column {
+    padding-left: 60px; /* Adjust based on the width of the icon column */
+}
+
 
 .taskbar {
     background-color: #c8c4c4;
@@ -45,10 +79,10 @@ body {
 }
 
 .window {
-    width: 600px;
-    height: 600px;
-    max-width: 600px;
-    max-height: 600px;
+    width: 640px;
+    height: 500px;
+    max-width: 640px;
+    max-height: 500px;
     margin: auto;
     font-size: small;
     display: flex; /* Use flexbox */
@@ -76,8 +110,64 @@ body {
     margin-top: auto; /* Pushes the button to the bottom */
     text-align: right; /* Align button to the right */
     padding-top: 15px; /* Padding around the button */
-    border-top: #adadad 2px solid; /* Top border as separator */
+    border-top: 1px solid #fff; /* Grey top border */
+
+    /* Adding a box-shadow to simulate an additional line above the border */
+    box-shadow: 0px -1px 0px 0px #808080; /* White line just above the grey border */
 }
+
+
+
+.bitcoin-stack {
+    min-height: 150px;
+    max-height: 150px; /* Adjust as needed */
+    width: 200px;
+    overflow-y: auto; /* Allows scrolling */
+    display: flex;
+    flex-direction: column-reverse; /* Stack grows downwards */
+    padding: 5px;
+    margin-top: 10px;
+    box-shadow: inset -1px -1px #fff,inset 1px 1px grey,inset -2px -2px #dfdfdf,inset 2px 2px #0a0a0a;
+}
+
+.stack-item {
+    border: 1px solid grey;
+    margin: 2px;
+    padding: 5px;
+    text-align: center;
+    word-wrap: break-word; /* Enables breaking and wrapping of long words */
+    max-width: 190px; /* Adjust as needed, should be less than the width of the stack container */
+}
+
+
+.stack-controls {
+    margin-bottom: 10px;
+}
+
+#popup-installation, #error-popup {
+    position: fixed; 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 300px; 
+    height: 150px; 
+    display: none;   
+}
+
+#installation-bar-container {
+    width: calc(100% - 4px); /* Subtract the padding and border */
+    box-shadow: inset -1px -1px #fff,inset 1px 1px grey,inset -2px -2px #dfdfdf,inset 2px 2px #0a0a0a;
+    padding: 2px;
+    margin-top: 10px; /* Smaller margin for a smaller window */
+    margin-bottom: 10px; /* Additional bottom margin for spacing */
+}
+
+#installation-bar {
+    width: 0%;
+    height: 20px;
+    background-color: #00037D;
+}
+
 
 
 @media screen and (min-width: 600px) {
@@ -88,15 +178,17 @@ body {
 @media screen and (max-width: 599px) {
     .window {
         width: calc(100% - 20px); /* Adjust the width to allow for margins */
-        height: calc(100vh - 70px); /* Adjust height for smaller screens */
+        height: calc(var(--vh, 1vh) * 100 - 70px); /* Adjusted height calculation */
         margin: 10px; /* Add a small margin around the window */
         max-width: none;
         max-height: none;
-    }
+    }    
 
     body {
         justify-content: flex-start; /* Align to the top on smaller screens */
         padding-top: 10px; /* Add padding at the top */
-        height: calc(100vh - 60px); /* Subtract the height of the taskbar */
+        height: calc(var(--vh, 1vh) * 100 - 60px); /* Use --vh variable */
+        margin: 0; /* Ensure no default margin is applied */
+        overflow-x: hidden; /* Prevent horizontal overflow */
     }
 }
