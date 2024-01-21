@@ -1,7 +1,4 @@
-/**
- * My custom styles
- */
-
+/*My custom styles*/
 body {
     background-color: teal;
     margin: 0;
@@ -9,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 50px); /* Subtract the height of the taskbar */
+    height: calc(100vh - 50px);
     padding-bottom: 50px;
 }
 
@@ -23,23 +20,22 @@ body {
 }
 
 .icon-column {
-    flex: 0 0 50px; /* Adjust the width as necessary */
+    flex: 0 0 50px;
     display: flex;
-    justify-content: center; /* Center the icon horizontally */
+    justify-content: center;
 }
 
 .icon {
-    width: 40px; /* Adjust as needed */
-    height: 40px; /* Adjust as needed */
+    width: 40px;
+    height: 40px;
 }
 
 .header-text {
-    /* Additional styling as needed */
-    margin-left: 10px; /* Space between icon and header text */
+    margin-left: 10px;
 }
 
 .text-column {
-    padding-left: 60px; /* Adjust based on the width of the icon column */
+    padding-left: 60px;
 }
 
 
@@ -84,8 +80,8 @@ body {
     max-height: 500px;
     margin: auto;
     font-size: small;
-    display: flex; /* Use flexbox */
-    flex-direction: column; /* Stack children vertically */
+    display: flex;
+    flex-direction: column;
 }
 
 .hidden {
@@ -93,43 +89,42 @@ body {
 }
 
 .window-body {
-    flex-grow: 1; /* Allow the content area to expand */
-    overflow-y: auto; /* Add scroll to the content area if necessary */
-    padding: 10px; /* Adjust padding as needed */
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
 }
 
 .content-window {
-    display: flex; /* Use Flexbox */
-    flex-direction: column; /* Stack children vertically */
-    height: 100%; /* Ensure it takes full height of its parent */
-    justify-content: flex-start; /* Align content to the start */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
 }
 
 .button-container {
-    margin-top: auto; /* Pushes the button to the bottom */
-    text-align: right; /* Align button to the right */
-    padding-top: 15px; /* Padding around the button */
-    border-top: 1px solid #fff; /* Grey top border */
-
-    /* Adding a box-shadow to simulate an additional line above the border */
-    box-shadow: 0px -1px 0px 0px #808080; /* White line just above the grey border */
+    margin-top: auto;
+    text-align: right;
+    padding-top: 15px;
+    border-top: 1px solid #fff;
+    box-shadow: 0px -1px 0px 0px #808080;
 }
 
 .code-block {
-    background-color: #f4f4f4; /* Light grey background */
+    background-color: #f4f4f4;
     box-shadow: inset -1px -1px #fff,inset 1px 1px grey,inset -2px -2px #dfdfdf,inset 2px 2px #0a0a0a;
-    padding: 10px; /* Padding inside the code block */ 
-    overflow-x: auto; /* Horizontal scroll for long lines */
+    padding: 10px;
+    overflow-x: auto; 
 }
 
 
 .bitcoin-stack {
     min-height: 150px;
-    max-height: 150px; /* Adjust as needed */
+    max-height: 150px;
+    margin-bottom: 10px;
     width: 200px;
-    overflow-y: auto; /* Allows scrolling */
+    overflow-y: auto;
     display: flex;
-    flex-direction: column-reverse; /* Stack grows downwards */
+    flex-direction: column-reverse;
     padding: 5px;
     margin-top: 10px;
     box-shadow: inset -1px -1px #fff,inset 1px 1px grey,inset -2px -2px #dfdfdf,inset 2px 2px #0a0a0a;
@@ -140,8 +135,8 @@ body {
     margin: 2px;
     padding: 5px;
     text-align: center;
-    word-wrap: break-word; /* Enables breaking and wrapping of long words */
-    max-width: 190px; /* Adjust as needed, should be less than the width of the stack container */
+    word-wrap: break-word;
+    max-width: 190px;
 }
 
 
@@ -150,11 +145,11 @@ body {
 }
 
 #installation-bar-container {
-    width: calc(100% - 4px); /* Subtract the padding and border */
+    width: calc(100% - 4px);
     box-shadow: inset -1px -1px #fff,inset 1px 1px grey,inset -2px -2px #dfdfdf,inset 2px 2px #0a0a0a;
     padding: 2px;
-    margin-top: 10px; /* Smaller margin for a smaller window */
-    margin-bottom: 10px; /* Additional bottom margin for spacing */
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .installation-bar {
@@ -172,19 +167,19 @@ body {
 }
 @media screen and (max-width: 599px) {
     .window {
-        width: calc(100% - 20px); /* Adjust the width to allow for margins */
-        height: calc(var(--vh, 1vh) * 100 - 70px); /* Adjusted height calculation */
-        margin: 10px; /* Add a small margin around the window */
+        width: calc(100% - 20px);
+        height: calc(var(--vh, 1vh) * 100 - 70px);
+        margin: 10px;
         max-width: none;
         max-height: none;
     }    
 
     body {
-        justify-content: flex-start; /* Align to the top on smaller screens */
-        padding-top: 10px; /* Add padding at the top */
-        height: calc(var(--vh, 1vh) * 100 - 60px); /* Use --vh variable */
-        margin: 0; /* Ensure no default margin is applied */
-        overflow-x: hidden; /* Prevent horizontal overflow */
+        justify-content: flex-start;
+        padding-top: 10px;
+        height: calc(var(--vh, 1vh) * 100 - 60px);
+        margin: 0; 
+        overflow-x: hidden;
     }
 }
 
@@ -515,261 +510,7 @@ body {
     display: inline-flex;
     align-items: center;
   }
-  
-  input[type="radio"],
-  input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    margin: 0;
-    background: 0;
-    position: fixed;
-    opacity: 0;
-    border: none;
-  }
-  
-  input[type="radio"] + label,
-  input[type="checkbox"] + label {
-    line-height: 13px;
-  }
-  
-  input[type="radio"] + label {
-    position: relative;
-    margin-left: var(--radio-total-width);
-  }
-  
-  input[type="radio"] + label::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: calc(-1 * (var(--radio-total-width-precalc)));
-    display: inline-block;
-    width: var(--radio-width);
-    height: var(--radio-width);
-    margin-right: var(--radio-label-spacing);
-    background: svg-load("./icon/radio-border.svg");
-  }
-  
-  input[type="radio"]:active + label::before {
-    background: svg-load("./icon/radio-border-disabled.svg");
-  }
-  
-  input[type="radio"]:checked + label::after {
-    content: "";
-    display: block;
-    width: var(--radio-dot-width);
-    height: var(--radio-dot-width);
-    top: var(--radio-dot-top);
-    left: var(--radio-dot-left);
-    position: absolute;
-    background: svg-load("./icon/radio-dot.svg");
-  }
-  
-  input[type="radio"]:focus + label,
-  input[type="checkbox"]:focus + label {
-    outline: 1px dotted #000000;
-  }
-  
-  input[type="radio"][disabled] + label::before {
-    background: svg-load("./icon/radio-border-disabled.svg");
-  }
-  
-  input[type="radio"][disabled]:checked + label::after {
-    background: svg-load("./icon/radio-dot-disabled.svg");
-  }
-  
-  input[type="checkbox"] + label {
-    position: relative;
-    margin-left: var(--checkbox-total-width);
-  }
-  
-  input[type="checkbox"] + label::before {
-    content: "";
-    position: absolute;
-    left: calc(-1 * (var(--checkbox-total-width-precalc)));
-    display: inline-block;
-    width: var(--checkbox-width);
-    height: var(--checkbox-width);
-    background: var(--button-highlight);
-    box-shadow: var(--border-field);
-    margin-right: var(--radio-label-spacing);
-  }
-  
-  input[type="checkbox"]:active + label::before {
-    background: var(--surface);
-  }
-  
-  input[type="checkbox"]:checked + label::after {
-    content: "";
-    display: block;
-    width: var(--checkmark-width);
-    height: var(--checkmark-width);
-    position: absolute;
-    top: var(--checkmark-top);
-    left: calc(
-      -1 * (var(--checkbox-total-width-precalc)) + var(--checkmark-left)
-    );
-    background: svg-load("./icon/checkmark.svg");
-  }
-  
-  input[type="checkbox"][disabled] + label::before {
-    background: var(--surface);
-  }
-  
-  input[type="checkbox"][disabled]:checked + label::after {
-    background: svg-load("./icon/checkmark-disabled.svg");
-  }
-  
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"],
-  input[type="search"],
-  select,
-  textarea {
-    padding: 3px 4px;
-    border: none;
-    box-shadow: var(--border-field);
-    background-color: var(--button-highlight);
-    box-sizing: border-box;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0;
-  }
-  
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="search"],
-  select {
-    height: 21px;
-  }
-  input[type="number"] {
-    /* need this 1 pixel to fit the spinner controls in box */
-    height: 22px;
-  }
-  /* clears the ‘X’ from Internet Explorer */
-  input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
-  input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
-  /* clears the ‘X’ from Chrome */
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration { display: none; }
-  
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"],
-  input[type="search"] {
-    /* For some reason descenders are getting cut off without this */
-    line-height: 2;
-  }
-  
-  input[type="email"]:disabled,
-  input[type="tel"]:disabled,
-  input[type="password"]:disabled,
-  input[type="text"]:disabled,
-  input[type="number"]:disabled,
-  input[type="search"]:disabled,
-  input[type="email"]:read-only,
-  input[type="tel"]:read-only,
-  input[type="password"]:read-only,
-  input[type="text"]:read-only,
-  input[type="number"]:read-only,
-  input[type="search"]:read-only,
-  textarea:disabled {
-    background-color: var(--surface);
-  }
-  
-  select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    position: relative;
-    padding-right: 32px;
-    background-image: svg-load("./icon/button-down.svg");
-    background-position: top 2px right 2px;
-    background-repeat: no-repeat;
-    border-radius: 0;
-  }
-  
-  select:focus,
-  input[type="text"]:focus,
-  input[type="password"]:focus,
-  input[type="email"]:focus,
-  input[type="tel"]:focus,
-  input[type="number"]:focus,
-  input[type="search"]:focus,
-  textarea:focus {
-    outline: none;
-  }
-  
-  input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    background: transparent;
-  }
-  
-  input[type="range"]:focus {
-    outline: none;
-  }
-  
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 21px;
-    width: 11px;
-    background: svg-load("./icon/indicator-horizontal.svg");
-    transform: translateY(-8px);
-    box-shadow: none;
-    border: none;
-  }
-  
-  input[type="range"].has-box-indicator::-webkit-slider-thumb {
-    background: svg-load("./icon/indicator-rectangle-horizontal.svg");
-    transform: translateY(-10px);
-  }
-  
-  input[type="range"]::-moz-range-thumb {
-    height: 21px;
-    width: 11px;
-    border: 0;
-    border-radius: 0;
-    background: svg-load("./icon/indicator-horizontal.svg");
-    transform: translateY(2px);
-  }
-  
-  input[type="range"].has-box-indicator::-moz-range-thumb {
-    background: svg-load("./icon/indicator-rectangle-horizontal.svg");
-    transform: translateY(0px);
-  }
-  
-  input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 2px;
-    box-sizing: border-box;
-    background: black;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
-    box-shadow: 1px 0 0 white, 1px 1px 0 white, 0 1px 0 white, -1px 0 0 darkgrey,
-      -1px -1px 0 darkgrey, 0 -1px 0 darkgrey, -1px 1px 0 white, 1px -1px darkgrey;
-  }
-  
-  input[type="range"]::-moz-range-track {
-    width: 100%;
-    height: 2px;
-    box-sizing: border-box;
-    background: black;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
-    box-shadow: 1px 0 0 white, 1px 1px 0 white, 0 1px 0 white, -1px 0 0 darkgrey,
-      -1px -1px 0 darkgrey, 0 -1px 0 darkgrey, -1px 1px 0 white, 1px -1px darkgrey;
-  }
-  
+
   .is-vertical {
     display: inline-block;
     width: 4px;
@@ -869,7 +610,6 @@ body {
   ul.tree-view ul {
     margin-left: 16px;
     padding-left: 16px;
-    /* Goes down too far */
     border-left: 1px dotted #808080;
   }
   
@@ -886,7 +626,6 @@ body {
     border-bottom: 1px dotted #808080;
   }
   
-  /* Cover the bottom of the left dotted border */
   ul.tree-view ul > li:last-child::after {
     content: "";
     display: block;
@@ -1051,39 +790,6 @@ body {
     background-color: #fff;
   }
   
-  table {
-    border-collapse: collapse;
-    position: relative;
-    text-align: left;
-    white-space: nowrap;
-    background-color: #fff;
-  }
-  
-  table > thead > tr > * {
-    position: sticky;
-    top: 0;
-    height: 17px;
-    box-shadow: var(--border-raised-outer), var(--border-raised-inner);
-    background: var(--surface);
-    box-sizing: border-box;
-    font-weight: normal;
-    padding: 0 var(--grouped-element-spacing);
-  }
-  
-  table.interactive > tbody > tr {
-    cursor: pointer;
-  }
-  
-  table > tbody > tr.highlighted {
-    color: #fff;
-    background-color: var(--dialog-blue);
-  }
-  
-  table > tbody > tr > * {
-    padding: 0 var(--grouped-element-spacing);
-    height: 14px;
-  }
-  
   .progress-indicator {
     height: 32px;
     position: relative;
@@ -1097,7 +803,6 @@ body {
     border-radius: 0;
   }
   
-  
   .progress-indicator > .progress-indicator-bar {
     height: 100%;
     display: block;
@@ -1106,7 +811,7 @@ body {
   
   .progress-indicator.segmented > .progress-indicator-bar {
     width: 100%;
-    background-color: transparent; /* resets the background color which is set to blue in the non-segmented selector */
+    background-color: transparent;
     background-image: linear-gradient(
       90deg,
       var(--dialog-blue) 0 16px,

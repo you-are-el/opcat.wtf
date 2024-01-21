@@ -156,12 +156,12 @@
                 </div>
                 <div class="text-column">
                     <p id="explanation-text">
-                        In this interactive demonstration, you'll see how the combination of OP_CAT and OP_DUP can 
-                        lead to rapidly growing stack sizes. Such growth mirrors the concerns in Bitcoin scripting, 
-                        where it could significantly slow down or even halt node processing.
+                        In this interactive demo, you'll see how the combination of OP_CAT and OP_DUP can 
+                        lead to rapidly growing stack sizes. Being evaluated on a bitcoin node, this could 
+                        significantly slow down or even halt node processing.
                         <br><br>
                         Use 'OP_DUP' to duplicate the top item on the stack and 'OP_CAT' to concatenate the top two items. 
-                        Please proceed with caution; repeatedly executing these operations in this simulation can cause 
+                        Please proceed with caution; repeatedly executing these operations can cause 
                         similar slowdowns or freezing in your browser, reflecting the real-world impact this would have on an actual Bitcoin node.
                     </p>
                     <div class="stack-controls">
@@ -212,7 +212,6 @@
                     <button onclick="previousWindow()">&lt; Back</button>
                     <button onclick="startInstallation(event, 'popup-installation-5000')">Install</button>
                 </div>
-                <!-- Pop-up structure using 98.css styles -->
                 <div id="popup-installation-5000" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
                     <div class="title-bar">
                         <div class="title-bar-text">Setup Wizard</div>
@@ -227,42 +226,6 @@
             </div>
 
             <div id="window8" class="content-window hidden">
-                <div class="header-row">
-                    <div class="icon-column">
-                        <img alt="Icon" class="icon">
-                    </div>
-                    <p class="header-text"><strong>DUP CAT DUP CAT not ... &lt;boom&gt;?</strong></p>
-                </div>
-                <div class="text-column">
-                    <p id="explanation-text">
-                        With the 5000-byte size limit in place for OP_CAT, the risk of stack growth is mitigated.
-                        <br><br>
-                        For demonstration, let's explore a simulated environment where you can use OP_CAT in conjunction with OP_DUP, without the risk of creating an oversized stack.The 5000 byte limit is applied here to prevent excessive growth.
-                    </p>
-                    <div class="stack-controls">
-                        <button id="dup-button-4">OP_DUP</button>
-                        <button id="cat-button-4">OP_CAT</button>
-                    </div>
-                    <div class="bitcoin-stack" id="bitcoin-stack-4"></div>
-                </div>
-                <div class="button-container">
-                    <button onclick="previousWindow()">&lt; Back</button>
-                    <button onclick="nextWindow()">Next &gt;</button>
-                </div>
-                <div id="error-popup-5000" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
-                    <div class="title-bar">
-                        <div class="title-bar-text">Error</div>
-                    </div>
-                    <div class="window-body" style="text-align: center;">
-                        <p>Error executing OP_CAT: Resulting item exceeds the 5000-byte limit.</p>
-                        <div style="margin-top: 20px;">
-                            <button onclick="closeErrorPopup('error-popup-5000')">OK</button>
-                        </div>
-                    </div>
-                </div>                
-            </div>
-
-            <div id="window9" class="content-window hidden">
                 <div class="header-row">
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
@@ -284,7 +247,6 @@
                     <button onclick="previousWindow()">&lt; Back</button>
                     <button onclick="startInstallation(event, 'popup-installation-200')">Install</button>
                 </div>
-                <!-- Pop-up structure using 98.css styles -->
                 <div id="popup-installation-200" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
                     <div class="title-bar">
                         <div class="title-bar-text">Setup Wizard</div>
@@ -298,7 +260,7 @@
                 </div>
             </div>
 
-            <div id="window10" class="content-window hidden">
+            <div id="window9" class="content-window hidden">
                 <div class="header-row">
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
@@ -307,9 +269,10 @@
                 </div>
                 <div class="text-column">
                     <p id="explanation-text">
-                        With the limit of 200 opcodes per script in place, there is even further restrictions on how OP_DUP and OP_CAT can be used in conjunction.
+                        With the limit of 200 opcodes per script and 5000 bytes per stack item in place, the risk of stack growth is mitigated.
                         <br><br>
-                        For demonstration, there is a counter that keeps track of the number of opcodes executed. The script will fail if the counter exceeds 200.
+                        For demonstration, there is a counter that keeps track of the number of opcodes executed. 
+                        The script will fail if the counter exceeds 200 or if the result of OP_CAT exceeds the 5000 bytes limit.
                     </p>
                     <div class="stack-controls">
                         <button id="dup-button-5">OP_DUP</button>
@@ -346,7 +309,7 @@
                 </div>                 
             </div>
 
-            <div id="window11" class="content-window hidden">
+            <div id="window10" class="content-window hidden">
                 <div class="header-row">
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
@@ -378,7 +341,6 @@
                     <button onclick="previousWindow()">&lt; Back</button>
                     <button onclick="startInstallation(event, 'popup-installation-opcat')">Deactivate OP_CAT</button>
                 </div>
-                <!-- Pop-up structure using 98.css styles -->
                 <div id="popup-installation-opcat" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
                     <div class="title-bar">
                         <div class="title-bar-text">Setup Wizard</div>
@@ -392,7 +354,7 @@
                 </div>
             </div>
 
-            <div id="window12" class="content-window hidden">
+            <div id="window11" class="content-window hidden">
                 <div class="header-row">
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
@@ -414,7 +376,6 @@
                     <button onclick="previousWindow()">&lt; Back</button>
                     <button onclick="startInstallation(event, 'popup-installation-taproot')">Upgrade to Taproot</button>
                 </div>
-                <!-- Pop-up structure using 98.css styles -->
                 <div id="popup-installation-taproot" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
                     <div class="title-bar">
                         <div class="title-bar-text">Taproot Wizard</div>
@@ -428,7 +389,7 @@
                 </div>
             </div>
 
-            <div id="window13" class="content-window hidden">
+            <div id="window12" class="content-window hidden">
                 <div class="header-row">
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
@@ -465,7 +426,7 @@
                 </div>                
             </div>
 
-            <div id="window14" class="content-window hidden">
+            <div id="window13" class="content-window hidden">
                 <div class="header-row">
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
@@ -479,7 +440,7 @@
                         have the 520 byte stack item size limit, but the opcode limit is gone. With Tapscript there is also no limit anymore on the size of scripts in general.
                     </p>
                     <p>
-                        These changes allowed for the creation of Ordinals through the ability to create large transactions inscribing 3.96MB of wizard JPEGs. Within these current
+                        These changes allowed for the creation of Ordinals through the ability to create large transactions like inscribing a 3.92MB Taproot Wizard. Within these current
                         rules, we can't really do any more harm with OP_CAT than we do with any other kind of transactions. At least in terms of transcation size.
                     </p>
                     <p>
@@ -494,7 +455,7 @@
                 </div>
             </div>
 
-            <div id="window15" class="content-window hidden">
+            <div id="window14" class="content-window hidden">
                 <div class="header-row">
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
@@ -517,7 +478,6 @@
             </div>
             
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
