@@ -185,8 +185,8 @@
                 </div>
                 <div class="text-column">
                     <p>
-                        To address these concerns, on July 29th 2010 Satoshi for the first time introduced a stack size item limit of 5000 bytes in commit 757f076. 
-                        This commit also included a change to OP_CAT where it would fail if the concanated item exceeded this 5000 byte limit.
+                        To address these concerns, on July 29th 2010 Satoshi introduced a stack size item limit of 5000 bytes in commit 757f076. 
+                        This commit also included a change to OP_CAT where it would fail if the concatenated item exceeded this 5000 byte limit.
                     </p>
                     <p class="code-block">
                         case OP_CAT:<br>
@@ -307,7 +307,7 @@
                 </div>
                 <div class="text-column">
                     <p id="explanation-text">
-                        With the limit of 200 opcodes per script in place, there is even further restrictions on how OP_DUP and OP_CAT can be used in conjucntion.
+                        With the limit of 200 opcodes per script in place, there is even further restrictions on how OP_DUP and OP_CAT can be used in conjunction.
                         <br><br>
                         For demonstration, there is a counter that keeps track of the number of opcodes executed. The script will fail if the counter exceeds 200.
                     </p>
@@ -332,7 +332,18 @@
                             <button onclick="closeErrorPopup('error-popup-200')">OK</button>
                         </div>
                     </div>
-                </div>                
+                </div>
+                <div id="error-popup-5000-2" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Error</div>
+                    </div>
+                    <div class="window-body" style="text-align: center;">
+                        <p>Error executing OP_CAT: Resulting item exceeds the 5000-byte limit.</p>
+                        <div style="margin-top: 20px;">
+                            <button onclick="closeErrorPopup('error-popup-5000-2')">OK</button>
+                        </div>
+                    </div>
+                </div>                 
             </div>
 
             <div id="window11" class="content-window hidden">
@@ -395,7 +406,7 @@
                         Today, 14 years after its deactivation, OP_CAT is still deactivated. While we can't ask Satoshi why he made this decision, we can look at the
                         current state of Bitcoin and its scripting language. The latest upgrade to Bitcoin was the Taproot upgrade (which went into full effect in 2021), offering crucial enhancements to the Bitcoin protocol. 
                         While Taproot itself is a broader upgrade improving Bitcoin's privacy and efficiency, it also introduced Tapscript which specifically addresses script execution and security. Among many things it lifted 
-                        the opcode limit per script and also lifted the overall script size limit enabling longer and more complex scripts. 
+                        the opcode limit per script and also lifted the overall script size limit enabling longer and more complex scripts. It still has the 520 byte stack item size limit in place.
                     </p>
                     <p>
                         Let's upgrade to Taproot and re-revaluate our decisions. Click 'Upgrade to Taproot' to proceed.
@@ -424,16 +435,53 @@
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
                     </div>
+                    <p class="header-text"><strong>OP_CAT on Taproot</strong></p>
+                </div>
+                <div class="text-column">
+                    <p id="explanation-text">
+                        While OP_CAT remains disabled in Bitcoin scripting, the Tapscript upgrade, with its 520-byte size limit, provides a framework that could reintroduce OP_CAT safely in the future.
+                        <br><br>
+                        For demonstration, let's explore a simulated environment where you can use OP_CAT in conjunction with OP_DUP, without the risk of creating an oversized stack. Tapscript's size limit of 520 bytes is applied here to prevent excessive growth.
+                        Furthermore, there are no restrictions to the number of opcodes per script.
+                    </p>
+                    <div class="stack-controls">
+                        <button id="dup-button-6" onclick="duplicateTop()">OP_DUP</button>
+                        <button id="cat-button-6" onclick="concatenateTopTwo()">OP_CAT</button>
+                    </div>
+                    <div class="bitcoin-stack" id="bitcoin-stack-6"></div>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="nextWindow()">Next &gt;</button>
+                </div>
+                <div id="error-popup-520" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Error</div>
+                    </div>
+                    <div class="window-body" style="text-align: center;">
+                        <p>Error executing OP_CAT: Resulting item exceeds the 520-byte limit.</p>
+                        <div style="margin-top: 20px;">
+                            <button onclick="closeErrorPopup('error-popup-520')">OK</button>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
+            <div id="window14" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
                     <p class="header-text"><strong>Reintroducing OP_CAT</strong></p>
                 </div>
                 <div class="text-column">
                     <p>
-                        So let's riterate. OP_CAT was deactivated in 2010. Likely due to security risks regarding memory and stack size issues. Yet, Satoshi already introduced
+                        So let's reiterate. OP_CAT was deactivated in 2010. Likely due to security risks regarding memory and stack size issues. Yet, Satoshi already introduced
                         useful mitigations to these risks in 2010. Fast forward 14 years and some of these measures are still in place, others have changed entirely. We still
                         have the 520 byte stack item size limit, but the opcode limit is gone. With Tapscript there is also no limit anymore on the size of scripts in general.
                     </p>
                     <p>
-                        These changes allowed for the creation of Ordinals throug tha ability to create large transactions inscribing 3.96MB of wizard JPEGs. Within these current
+                        These changes allowed for the creation of Ordinals through the ability to create large transactions inscribing 3.96MB of wizard JPEGs. Within these current
                         rules, we can't really do any more harm with OP_CAT than we do with any other kind of transactions. At least in terms of transcation size.
                     </p>
                     <p>
@@ -448,12 +496,12 @@
                 </div>
             </div>
 
-            <div id="window14" class="content-window hidden">
+            <div id="window15" class="content-window hidden">
                 <div class="header-row">
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
                     </div>
-                    <p class="header-text"><strong>Reintroducing OP_CAT</strong></p>
+                    <p class="header-text"><strong>OP_CAT setup wizard completed</strong></p>
                 </div>
                 <div class="text-column">
                     <p>

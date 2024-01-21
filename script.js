@@ -1,5 +1,5 @@
 let currentWindow = 1;
-const totalWindows = 14; // Update this as per the number of windows you have
+const totalWindows = 15; // Update this as per the number of windows you have
 const base64Icon = 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAANlBMVEUAAAD/////mQDMzMyZmZlmZmb4+Pjn59bTfwDAwMC3fwCtqZCGhoYz/2YAgAD/+/BVVVX///+oh7OkAAAAEnRSTlP//////////////////////wDiv78SAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGElEQVQ4ja2TzW6EMAwGx3YSqESl5v0fclcCStmE0gNLlg0c6xNoBvvLDxJ5VqIuD+AKT1pxu8WDkNK6vPMwc+iQEvLOdeOlQ/vj33hJVDKQTyErgQfAuk1qS6Aq+spadajXJlIZrhLW02r+u4PU/Dyiej+M0LZmlbBc8pdQzwIY6IrwfcbJ427R7e65PC7vI3p/IeDyK8NFgnW7AHuGgMwZAihsl6mdj4JA4XLckV14fo5uj8DXxiQC/TlBuyyYPaxRoFefzWfzWZtsPluTWywEI9jdQa82NTo1OgU/Nm5sdOyWBcBUUHq1qdOp06mzsdOx0+nAEWfnAB/zL6AqDNFdnqICqDBE3OUPIwrIQAT3ecGfZxcB/gDW1FLDgGIW7AAAAABJRU5ErkJggg=='; // Replace with your actual base64 string
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -64,20 +64,22 @@ class BitcoinStack {
     }
         
     updateCounter() {  
-        // Decrement the counter
-        if (this.counterDisabled == false) {
-            this.opcodeCounter++;
-        }
+        if (currentWindow == 10) {
+            // Decrement the counter
+            if (this.counterDisabled == false) {
+                this.opcodeCounter++;
+            }
 
-        // Update the display
-        document.getElementById('opcode-counter').textContent = this.opcodeCounter;
+            // Update the display
+            document.getElementById('opcode-counter').textContent = this.opcodeCounter;
 
-        // Check if the counter has reached 0
-        if (this.opcodeCounter >= 200) {
-            // Show error-popup
-            var errorPopup = document.getElementById("error-popup-200");
-            errorPopup.style.display = 'block';
-            this.counterDisabled = true;
+            // Check if the counter has reached 0
+            if (this.opcodeCounter >= 200) {
+                // Show error-popup
+                var errorPopup = document.getElementById("error-popup-200");
+                errorPopup.style.display = 'block';
+                this.counterDisabled = true;
+            }
         }
     }
 
@@ -86,6 +88,7 @@ class BitcoinStack {
             const topItem = this.stack[this.stack.length - 1];
             this.stack.push(topItem);
             this.updateStackDisplay();
+            this.updateCounter();
         }
     }
 
@@ -98,7 +101,7 @@ class BitcoinStack {
         }
     }
 
-    concatenateTopTwo5000() {
+    concatenateTopTwoLimit(limit, errorPopupId) {
         if (this.stack.length > 1) {
             const topItem = this.stack.pop();
             const nextItem = this.stack.pop();
@@ -107,12 +110,18 @@ class BitcoinStack {
             // Calculate the byte size of the concatenated item
             const concatenatedItemSize = new Blob([concatenatedItem]).size;
             
-            if (concatenatedItemSize <= 5000) {
+            if (concatenatedItemSize <= limit) {
                 this.stack.push(concatenatedItem);
+                this.updateCounter();
             } else {
                 // Show error-popup
-                var errorPopup = document.getElementById("error-popup-5000");
-                errorPopup.style.display = 'block';
+                if (limit == 520) {
+                    var errorPopup = document.getElementById(errorPopupId);
+                    errorPopup.style.display = 'block';
+                } else if (limit == 5000) { 
+                    var errorPopup = document.getElementById(errorPopupId);
+                    errorPopup.style.display = 'block';
+                }
                 // Put the items back on the stack
                 this.stack.push(nextItem);
                 this.stack.push(topItem);
@@ -138,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const stack3 = new BitcoinStack('bitcoin-stack-3', ['Item']); // Stack in window 2 with 1 initial items
     const stack4 = new BitcoinStack('bitcoin-stack-4', ['Item']); // Stack in window 2 with 1 initial items
     const stack5 = new BitcoinStack('bitcoin-stack-5', ['Item']); // Stack in window 2 with 1 initial items
+    const stack6 = new BitcoinStack('bitcoin-stack-6', ['Item']); // Stack in window 2 with 1 initial items
 
     // Bind the buttons to the specific stack instance
     document.getElementById('cat-button-1').onclick = () => stack1.concatenateTopTwo();
@@ -148,17 +158,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('cat-button-3').onclick = () => stack3.concatenateTopTwo();
 
     document.getElementById('dup-button-4').onclick = () => stack4.duplicateTop();
-    document.getElementById('cat-button-4').onclick = () => stack4.concatenateTopTwo5000();
+    document.getElementById('cat-button-4').onclick = () => stack4.concatenateTopTwoLimit('5000', 'error-popup-5000');
 
     document.getElementById('dup-button-5').onclick = () => {
         stack5.duplicateTop();
-        stack5.updateCounter();
     };
     
     document.getElementById('cat-button-5').onclick = () => {
-        stack5.concatenateTopTwo5000();
-        stack5.updateCounter();
+        stack5.concatenateTopTwoLimit('5000', 'error-popup-5000-2');
     };
+
+    document.getElementById('dup-button-6').onclick = () => stack6.duplicateTop();
+    document.getElementById('cat-button-6').onclick = () => stack6.concatenateTopTwoLimit('520', 'error-popup-520');
 });
 
 function startInstallation(event, popupId) {
