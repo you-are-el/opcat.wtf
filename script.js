@@ -144,9 +144,18 @@ document.addEventListener('DOMContentLoaded', function() {
 function startInstallation(event, popupId) {
     var upgradeButton = event.target;
     var popup = document.getElementById(popupId);
+
+    // Find the parent 'content-window' of the popup
+    var contentWindow = popup.closest('.content-window');
+
+    // Disable all buttons in the 'button-container' of the parent 'content-window'
+    var buttons = contentWindow.querySelectorAll('.button-container button');
+    buttons.forEach(function(button) {
+        button.disabled = true;
+    });
+
     var elem = popup.querySelector('.installation-bar');
     var width = 0;
-
     elem.style.width = '0%';
     popup.style.display = 'block';
     var intervalId = setInterval(frame, 50);
@@ -157,6 +166,11 @@ function startInstallation(event, popupId) {
             popup.style.display = 'none';
             upgradeButton.textContent = 'Next >';
             upgradeButton.onclick = nextWindow;
+
+            // Re-enable all buttons in the 'button-container'
+            buttons.forEach(function(button) {
+                button.disabled = false;
+            });
         } else {
             width++;
             elem.style.width = width + '%';
