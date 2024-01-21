@@ -50,8 +50,9 @@
                 </div>
                 <div class="text-column">
                     <p>
-                        OP_CAT is an opcode within the Bitcoin scripting language. Bitcoin scripts, comprising a sequence of opcodes, 
-                        define the conditions for transactions to be valid and added to the blockchain.
+                        OP_CAT is an opcode within the Bitcoin scripting language and was introduced in a very early version of Bitcoin. It was already
+                        present in the first commit 4405b78 of the Bitcoin Github repository. This initial commit was converted from svn on sourceforge. 
+                        Earlier changes were never in either svn or git. It is not known if Satoshi used any kind of source control before this.
                     </p>
                     <p><strong>What is an opcode?</strong></p>
                     <p>
@@ -75,7 +76,7 @@
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
                     </div>
-                    <p class="header-text"><strong>OP_CAT in Action</strong></p>
+                    <p class="header-text"><strong>OP_CAT in action</strong></p>
                 </div>
                 <div class="text-column">
                     <p id="explanation-text">
@@ -84,7 +85,7 @@
                     </p>
                     <p>Press 'OP_CAT' to concatenate "abc" and "123" into a single item on the stack.</p>
                     <div class="stack-controls">
-                        <button id="cat-button-1" onclick="concatenateTopTwo()">OP_CAT</button>
+                        <button id="cat-button-1">OP_CAT</button>
                     </div>
                     <div class="bitcoin-stack" id="bitcoin-stack-1"></div>
                 </div>
@@ -100,7 +101,7 @@
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
                     </div>
-                    <p class="header-text"><strong>Deactivation of OP_CAT</strong></p>
+                    <p class="header-text"><strong>The dangers of OP_CAT</strong></p>
                 </div>
                 <div class="text-column">
                     <p>
@@ -109,7 +110,7 @@
                     <p>
                         The key issue with OP_CAT was its capability to create stack elements of exponentially increasing size in relation to the size of the script itself. 
                         Such functionality posed a significant threat to the network's stability. Scripts utilizing OP_CAT could potentially generate transactions that were 
-                        very large or complex, thereby causing network performance issues like slowdowns.
+                        very large or complex, thereby causing network performance and memory issues.
                     </p>
                     <p>
                         This concern was especially relevant when OP_CAT was used in combination with OP_DUP, an opcode that duplicates the top item on the stack. For instance, if 'X' is at the top of 
@@ -127,7 +128,7 @@
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
                     </div>
-                    <p class="header-text"><strong>OP_DUP in Action</strong></p>
+                    <p class="header-text"><strong>OP_DUP in action</strong></p>
                 </div>
                 <div class="text-column">
                     <p id="explanation-text">
@@ -135,7 +136,7 @@
                     </p>
                     <p>Press 'OP_DUP' to see how it duplicates the top item on the stack, effectively doubling "X".</p>
                     <div class="stack-controls">
-                        <button id="dup-button-2" onclick="duplicateTop()">OP_DUP</button>
+                        <button id="dup-button-2">OP_DUP</button>
                     </div>
                     <div class="bitcoin-stack" id="bitcoin-stack-2"></div>
                 </div>
@@ -164,8 +165,8 @@
                         similar slowdowns or freezing in your browser, reflecting the real-world impact this would have on an actual Bitcoin node.
                     </p>
                     <div class="stack-controls">
-                        <button id="dup-button-3" onclick="duplicateTop()">OP_DUP</button>
-                        <button id="cat-button-3" onclick="concatenateTopTwo()">OP_CAT</button>
+                        <button id="dup-button-3">OP_DUP</button>
+                        <button id="cat-button-3">OP_CAT</button>
                     </div>
                     <div class="bitcoin-stack" id="bitcoin-stack-3"></div>
                 </div>
@@ -180,33 +181,46 @@
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
                     </div>
-                    <p class="header-text"><strong>Tapscript to the rescue</strong></p>
+                    <p class="header-text"><strong>Limiting the size of items on the stack</strong></p>
                 </div>
                 <div class="text-column">
                     <p>
-                        Tapscript, an integral component of the Bitcoin Taproot upgrade (which went into effect in 2021), offers a crucial enhancement to the Bitcoin protocol. 
-                        While Taproot itself is a broader upgrade improving Bitcoin's privacy and efficiency, Tapscript specifically addresses script execution and security.
+                        To address these concerns, on July 29th 2010 Satoshi for the first time introduced a stack size item limit of 5000 bytes in commit 757f076. 
+                        This commit also included a change to OP_CAT where it would fail if the concanated item exceeded this 5000 byte limit.
+                    </p>
+                    <p class="code-block">
+                        case OP_CAT:<br>
+                        {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; vch1.size(); i++)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vch1[i] |= vch2[i];<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// (x1 x2 -- out)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;if (stack.size() &lt; 2)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;valtype& vch1 = stacktop(-2);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;valtype& vch2 = stacktop(-1);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;vch1.insert(vch1.end(), vch2.begin(), vch2.end());<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;stack.pop_back();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<strong>if (stacktop(-1).size() &gt; 5000)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;</strong><br>
+                        }
                     </p>
                     <p>
-                        One significant feature of Tapscript is the enforcement of a maximum size limit for stack elements — capped at 520 bytes. 
-                        This limit is crucial in addressing the issues associated with OP_CAT. By restricting the size of each stack element, 
-                        the creation of excessively large and potentially problematic stack elements is effectively prevented, ensuring more 
-                        robust script execution and network stability.
+                        Let's install this update to your system. Click 'Install' to proceed.
                     </p>
                 </div>
                 <div class="button-container">
                     <button onclick="previousWindow()">&lt; Back</button>
-                    <button onclick="startInstallation(event)">Upgrade to Taproot</button>
+                    <button onclick="startInstallation(event, 'popup-installation-5000')">Install</button>
                 </div>
                 <!-- Pop-up structure using 98.css styles -->
-                <div id="popup-installation" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
+                <div id="popup-installation-5000" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
                     <div class="title-bar">
-                        <div class="title-bar-text">Taproot Wizard</div>
+                        <div class="title-bar-text">Setup Wizard</div>
                     </div>
                     <div class="window-body">
-                        <p>Installing Taproot...</p>
+                        <p>Installing 5000 byte limit...</p>
                         <div id="installation-bar-container">
-                            <div id="installation-bar"></div>
+                            <div class="installation-bar"></div>
                         </div>
                     </div>
                 </div>
@@ -221,13 +235,13 @@
                 </div>
                 <div class="text-column">
                     <p id="explanation-text">
-                        While OP_CAT remains disabled in Bitcoin scripting, the Tapscript upgrade, with its 520-byte size limit, provides a framework for how OP_CAT could be reintroduced safely in the future.
+                        With the 5000-byte size limit in place for OP_CAT, the risk of stack growth is mitigated.
                         <br><br>
-                        For demonstration, let's explore a simulated environment where you can use OP_CAT in conjunction with OP_DUP, without the risk of creating an oversized stack. Tapscript's size limit is applied here to prevent excessive growth.
+                        For demonstration, let's explore a simulated environment where you can use OP_CAT in conjunction with OP_DUP, without the risk of creating an oversized stack.The 5000 byte limit is applied here to prevent excessive growth.
                     </p>
                     <div class="stack-controls">
-                        <button id="dup-button-4" onclick="duplicateTop()">OP_DUP</button>
-                        <button id="cat-button-4" onclick="concatenateTopTwo()">OP_CAT</button>
+                        <button id="dup-button-4">OP_DUP</button>
+                        <button id="cat-button-4">OP_CAT</button>
                     </div>
                     <div class="bitcoin-stack" id="bitcoin-stack-4"></div>
                 </div>
@@ -235,14 +249,14 @@
                     <button onclick="previousWindow()">&lt; Back</button>
                     <button onclick="nextWindow()">Next &gt;</button>
                 </div>
-                <div id="error-popup" class="window">
+                <div id="error-popup-5000" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
                     <div class="title-bar">
                         <div class="title-bar-text">Error</div>
                     </div>
                     <div class="window-body" style="text-align: center;">
-                        <p>Error executing OP_CAT: Resulting item exceeds the 520-byte limit.</p>
+                        <p>Error executing OP_CAT: Resulting item exceeds the 5000-byte limit.</p>
                         <div style="margin-top: 20px;">
-                            <button onclick="closeErrorPopup()">OK</button>
+                            <button onclick="closeErrorPopup('error-popup-5000')">OK</button>
                         </div>
                     </div>
                 </div>                
@@ -253,27 +267,201 @@
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
                     </div>
+                    <p class="header-text"><strong>Limiting the number of opcodes in a script</strong></p>
+                </div>
+                <div class="text-column">
+                    <p>
+                        Only two days later on July 31st 2010 Satoshi introduced a limit of 200 opcodes to be evaluated within one transaction. Likely
+                        to increase the security even further, this limit was introduced in commit 6ff5f71.
+                    </p>
+                    <p class="code-block">
+                        if (opcode &gt; OP_16 &amp;&amp; <strong>nOpCount++ &gt; 200</strong>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return false;
+                    </p>                    
+                    <p>Let's install this update to your system. Click 'Install' to proceed.</p>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="startInstallation(event, 'popup-installation-200')">Install</button>
+                </div>
+                <!-- Pop-up structure using 98.css styles -->
+                <div id="popup-installation-200" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Setup Wizard</div>
+                    </div>
+                    <div class="window-body">
+                        <p>Installing 200 opcodes limit...</p>
+                        <div id="installation-bar-container">
+                            <div class="installation-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="window10" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text"><strong>100 x DUP CAT</strong></p>
+                </div>
+                <div class="text-column">
+                    <p id="explanation-text">
+                        With the limit of 200 opcodes per script in place, there is even further restrictions on how OP_DUP and OP_CAT can be used in conjucntion.
+                        <br><br>
+                        For demonstration, there is a counter that keeps track of the number of opcodes executed. The script will fail if the counter exceeds 200.
+                    </p>
+                    <div class="stack-controls">
+                        <button id="dup-button-5">OP_DUP</button>
+                        <button id="cat-button-5">OP_CAT</button>
+                        <span id="opcode-counter" style="padding-left: 10px;">0</span>
+                    </div>
+                    <div class="bitcoin-stack" id="bitcoin-stack-5"></div>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="nextWindow()">Next &gt;</button>
+                </div>
+                <div id="error-popup-200" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Error</div>
+                    </div>
+                    <div class="window-body" style="text-align: center;">
+                        <p>Error executing opcode: Maximum limit of opcodes reached.</p>
+                        <div style="margin-top: 20px;">
+                            <button onclick="closeErrorPopup('error-popup-200')">OK</button>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
+            <div id="window11" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text"><strong>Deactivation of OP_CAT</strong></p>
+                </div>
+                <div class="text-column">
+                    <p>
+                        Two weeks later on July 31st 2010 Satoshi deactivated various opcodes including OP_CAT and 
+                        simultaniously introduced a stack item size limit of 520 bytes (from the previous 2000 bytes) in commit 4bd188c labeled “misc changes”. 
+                    </p>
+                    <p>
+                        There is no clear explanation given for this change. The commit message only states "misc changes" and there are no further comments in the code.
+                        With an even lower stack item size limit of 520 bytes, the memory risks of OP_CAT are even further mitigated, so it's not quite clear what the 
+                        real reason for it's deactivation were at the time.
+                    </p>
+                    <p class="code-block">
+                        if (opcode == OP_CAT ||<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;opcode == OP_SUBSTR ||<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;opcode == OP_LEFT ||<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;...<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return false;
+                    </p>                                        
+                    <p>There are many discussions and also misconceptions about the deactivation of OP_CAT. Yes, initially in 2009 OP_CAT could easily cause memory overflow issues.
+                        Especially in combination with OP_DUP, it could lead to exponential growth of the stack size. However, with the introduction of the 5000/520 byte limit
+                        and the 200 opcode limit, these risks were mitigated. So why was OP_CAT deactivated?
+                    </p>
+                    <p>Click 'Deactivate OP_CAT' to follow Satoshi's decision.</p>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="startInstallation(event, 'popup-installation-opcat')">Deactivate OP_CAT</button>
+                </div>
+                <!-- Pop-up structure using 98.css styles -->
+                <div id="popup-installation-opcat" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Setup Wizard</div>
+                    </div>
+                    <div class="window-body">
+                        <p>Deactivating OP_CAT and seting stack item size limit to 520 bytes...</p>
+                        <div id="installation-bar-container">
+                            <div class="installation-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="window12" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text"><strong>Fast forward to Taproot</strong></p>
+                </div>
+                <div class="text-column">
+                    <p>
+                        Today, 14 years after its deactivation, OP_CAT is still deactivated. While we can't ask Satoshi why he made this decision, we can look at the
+                        current state of Bitcoin and its scripting language. The latest upgrade to Bitcoin was the Taproot upgrade (which went into full effect in 2021), offering crucial enhancements to the Bitcoin protocol. 
+                        While Taproot itself is a broader upgrade improving Bitcoin's privacy and efficiency, it also introduced Tapscript which specifically addresses script execution and security. Among many things it lifted 
+                        the opcode limit per script and also lifted the overall script size limit enabling longer and more complex scripts. 
+                    </p>
+                    <p>
+                        Let's upgrade to Taproot and re-revaluate our decisions. Click 'Upgrade to Taproot' to proceed.
+                    </p>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="startInstallation(event, 'popup-installation-taproot')">Upgrade to Taproot</button>
+                </div>
+                <!-- Pop-up structure using 98.css styles -->
+                <div id="popup-installation-taproot" class="window" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; height: 150px; display: none;">
+                    <div class="title-bar">
+                        <div class="title-bar-text">Taproot Wizard</div>
+                    </div>
+                    <div class="window-body">
+                        <p>Installing Taproot...</p>
+                        <div id="installation-bar-container">
+                            <div class="installation-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="window13" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
                     <p class="header-text"><strong>Reintroducing OP_CAT</strong></p>
                 </div>
                 <div class="text-column">
                     <p>
-                        With the security concerns addressed by Tapscript, the question arises: 
-                        Why might we consider reintroducing OP_CAT?
+                        So let's riterate. OP_CAT was deactivated in 2010. Likely due to security risks regarding memory and stack size issues. Yet, Satoshi already introduced
+                        useful mitigations to these risks in 2010. Fast forward 14 years and some of these measures are still in place, others have changed entirely. We still
+                        have the 520 byte stack item size limit, but the opcode limit is gone. With Tapscript there is also no limit anymore on the size of scripts in general.
                     </p>
                     <p>
-                        OP_CAT holds significant utility for Bitcoin developers. 
-                        It enables the creation of more intricate scripts, paving the way for advanced applications on the Bitcoin network, such as covenant contracts.
+                        These changes allowed for the creation of Ordinals throug tha ability to create large transactions inscribing 3.96MB of wizard JPEGs. Within these current
+                        rules, we can't really do any more harm with OP_CAT than we do with any other kind of transactions. At least in terms of transcation size.
                     </p>
                     <p>
-                        Covenant contracts are a type of smart contract that facilitate complex 
-                        transaction conditions. For instance, they can be designed to allow spending of Bitcoins only under specific conditions, like if Bitcoin's price crosses a predetermined threshold.
+                        So should OP_CAT be reactivated? Well this is up to all of us to decide. There are interesting advantages pointed out by
+                        proponents of OP_CAT. Examples include coventants (ability to restric the spending of tokens after you sent them), vaults (ways to better custody your bitcoin)
+                        post-quantum proof Bitcoin using Lamport Signatures and improved bridges for connecting Bitcoin layer 2 solutions.
                     </p>
+                </div>
+                <div class="button-container">
+                    <button onclick="previousWindow()">&lt; Back</button>
+                    <button onclick="nextWindow()">Next &gt;</button>
+                </div>
+            </div>
+
+            <div id="window14" class="content-window hidden">
+                <div class="header-row">
+                    <div class="icon-column">
+                        <img alt="Icon" class="icon">
+                    </div>
+                    <p class="header-text"><strong>Reintroducing OP_CAT</strong></p>
+                </div>
+                <div class="text-column">
                     <p>
                         This concludes the OP_CAT setup wizard. You've gained insights into opcodes, 
-                        specifically OP_CAT and OP_DUP, the deactivation of OP_CAT, and how Tapscript aims 
-                        to mitigate related risks. The future reactivation of OP_CAT remains a topic of discussion. 
-                        Armed with this knowledge, you're now equipped to contribute meaningfully to the ongoing dialogue about Bitcoin's evolution.
+                        specifically OP_CAT and OP_DUP, the deactivation of OP_CAT and the reasons for it. You learned about how Bitcoin changed
+                        and how OP_CAT could be reintroduced in the future.
                     </p>
+                    <p>Armed with this knowledge, you're now equipped to contribute meaningfully to the ongoing dialogue about Bitcoin's evolution.</p>
                     <p>Click 'Finish' to end and restart the setup wizard.</p>
                 </div>
                 <div class="button-container">

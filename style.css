@@ -115,6 +115,12 @@ body {
     box-shadow: 0px -1px 0px 0px #808080; /* White line just above the grey border */
 }
 
+.code-block {
+    background-color: #f4f4f4; /* Light grey background */
+    box-shadow: inset -1px -1px #fff,inset 1px 1px grey,inset -2px -2px #dfdfdf,inset 2px 2px #0a0a0a;
+    padding: 10px; /* Padding inside the code block */ 
+    overflow-x: auto; /* Horizontal scroll for long lines */
+}
 
 
 .bitcoin-stack {
@@ -143,16 +149,6 @@ body {
     margin-bottom: 10px;
 }
 
-#popup-installation, #error-popup {
-    position: fixed; 
-    left: 50%; 
-    top: 50%; 
-    transform: translate(-50%, -50%); 
-    width: 300px; 
-    height: 150px; 
-    display: none;   
-}
-
 #installation-bar-container {
     width: calc(100% - 4px); /* Subtract the padding and border */
     box-shadow: inset -1px -1px #fff,inset 1px 1px grey,inset -2px -2px #dfdfdf,inset 2px 2px #0a0a0a;
@@ -161,7 +157,7 @@ body {
     margin-bottom: 10px; /* Additional bottom margin for spacing */
 }
 
-#installation-bar {
+.installation-bar {
     width: 0%;
     height: 20px;
     background-color: #00037D;
