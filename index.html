@@ -356,11 +356,9 @@
                 <div class="text-column">
                     <p>
                         Two weeks later on July 31st 2010 Satoshi deactivated various opcodes including OP_CAT and 
-                        simultaniously introduced a stack item size limit of 520 bytes (from the previous 2000 bytes) in commit 4bd188c labeled “misc changes”. 
-                    </p>
-                    <p>
+                        simultaniously introduced a stack item size limit of 520 bytes (from the previous 2000 bytes) in commit 4bd188c. 
                         There is no clear explanation given for this change. The commit message only states "misc changes" and there are no further comments in the code.
-                        With an even lower stack item size limit of 520 bytes, the memory risks of OP_CAT are even further mitigated, so it's not quite clear what the 
+                        With a stack item size limit of 520 bytes, the memory risks of OP_CAT are even further mitigated, so it's not quite clear what the 
                         real reason for it's deactivation were at the time.
                     </p>
                     <p class="code-block">
@@ -476,8 +474,8 @@
                 </div>
                 <div class="text-column">
                     <p>
-                        So let's reiterate. OP_CAT was deactivated in 2010. Likely due to security risks regarding memory and stack size issues. Yet, Satoshi already introduced
-                        useful mitigations to these risks in 2010. Fast forward 14 years and some of these measures are still in place, others have changed entirely. We still
+                        Let's reiterate. OP_CAT was deactivated in 2010. Likely due to security risks regarding memory and stack size issues. Yet, Satoshi already introduced
+                        useful mitigations to these risks in 2010. Fast forward 14 years and some of these measures are still in place, others have changed. We still
                         have the 520 byte stack item size limit, but the opcode limit is gone. With Tapscript there is also no limit anymore on the size of scripts in general.
                     </p>
                     <p>

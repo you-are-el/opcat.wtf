@@ -184,7 +184,7 @@ function startInstallation(event, popupId) {
     // Show the popup
     popup.style.display = 'block';
 
-    var intervalId = setInterval(frame, 10);
+    var intervalId = setInterval(frame, 50);
 
     function frame() {
         if (width >= 100) {
