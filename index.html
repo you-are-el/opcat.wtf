@@ -51,7 +51,7 @@
                 <div class="text-column">
                     <p>
                         OP_CAT is an opcode within the Bitcoin scripting language and was introduced in a very early version of Bitcoin. It was already
-                        present in the first commit 4405b78 of the Bitcoin Github repository.
+                        present in the first commit 4405b78 of the Bitcoin GitHub repository.
                     </p>
                     <p><strong>What is an opcode?</strong></p>
                     <p>
@@ -184,7 +184,7 @@
                 </div>
                 <div class="text-column">
                     <p>
-                        To address these concerns, on July 29th 2010 Satoshi introduced a stack size item limit of 5000 bytes in commit 757f076. 
+                        To address these concerns, on July 29th, 2010, Satoshi introduced a stack size item limit of 5000 bytes in commit 757f076. 
                         This commit also included a change to OP_CAT where it would fail if the concatenated item exceeded this 5000 byte limit.
                     </p>
                     <p class="code-block">
@@ -233,8 +233,8 @@
                 </div>
                 <div class="text-column">
                     <p>
-                        Only two days later on July 31st 2010 Satoshi introduced a limit of 200 opcodes to be evaluated within one transaction. Likely
-                        to increase the security even further, this limit was introduced in commit 6ff5f71.
+                        Only two days later, on July 31st, 2010, Satoshi introduced a limit of 200 opcodes to be evaluated within one transaction. 
+                        This limit was introduced in commit 6ff5f71, likely to increase security even further.
                     </p>
                     <p class="code-block">
                         if (opcode &gt; OP_16 &amp;&amp; <strong>nOpCount++ &gt; 200</strong>)<br>
@@ -264,7 +264,7 @@
                     <div class="icon-column">
                         <img alt="Icon" class="icon">
                     </div>
-                    <p class="header-text"><strong>100 x DUP CAT</strong></p>
+                    <p class="header-text"><strong>DUP CAT DUP CAT not &lt;boom&gt;</strong></p>
                 </div>
                 <div class="text-column">
                     <p id="explanation-text">
@@ -317,11 +317,11 @@
                 </div>
                 <div class="text-column">
                     <p>
-                        Two weeks later on July 31st 2010 Satoshi deactivated various opcodes including OP_CAT and 
-                        simultaniously introduced a stack item size limit of 520 bytes (from the previous 2000 bytes) in commit 4bd188c. 
-                        There is no clear explanation given for this change. The commit message only states "misc changes" and there are no further comments in the code.
-                        With a stack item size limit of 520 bytes, the memory risks of OP_CAT are even further mitigated, so it's not quite clear what the 
-                        real reason for it's deactivation were at the time.
+                        Two weeks later, on July 31st, 2010, Satoshi deactivated various opcodes, including OP_CAT, and simultaneously 
+                        introduced a stack item size limit of 520 bytes (from the previous 2000 bytes) in commit 4bd188c. There is no 
+                        clear explanation given for this change. The commit message only states "misc changes" and no further comments 
+                        are in the code. With a stack item size limit of 520 bytes, the memory risks of OP_CAT are even further mitigated, 
+                        so it's not quite clear what the real reason for its deactivation was at the time.
                     </p>
                     <p class="code-block">
                         if (opcode == OP_CAT ||<br>
@@ -330,9 +330,11 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;...<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;return false;
                     </p>                                        
-                    <p>There are many discussions and also misconceptions about the deactivation of OP_CAT. Yes, initially in 2009 OP_CAT could easily cause memory overflow issues.
-                        Especially in combination with OP_DUP, it could lead to exponential growth of the stack size. However, with the introduction of the 5000/520 byte limit
-                        and the 200 opcode limit, these risks were mitigated. So why was OP_CAT deactivated?
+                    <p>There are many discussions and also misconceptions about the deactivation of OP_CAT. 
+                        Yes, initially, in 2009, OP_CAT could easily cause memory overflow issues. 
+                        Especially in combination with OP_DUP, it could lead to exponential growth of the stack size. 
+                        However, with the introduction of the 5000/520 byte limit and the 200 opcode limit, these risks were mitigated. 
+                        So why was OP_CAT deactivated?
                     </p>
                     <p>Click 'Deactivate OP_CAT' to follow Satoshi's decision.</p>
                 </div>
@@ -362,13 +364,15 @@
                 </div>
                 <div class="text-column">
                     <p>
-                        Today, 14 years after its deactivation, OP_CAT is still deactivated. While we can't ask Satoshi why he made this decision, we can look at the
-                        current state of Bitcoin and its scripting language. The latest upgrade to Bitcoin was the Taproot upgrade (which went into full effect in 2021), offering crucial enhancements to the Bitcoin protocol. 
-                        While Taproot itself is a broader upgrade improving Bitcoin's privacy and efficiency, it also introduced Tapscript which specifically addresses script execution and security. Among many things it lifted 
-                        the opcode limit per script and also lifted the overall script size limit enabling longer and more complex scripts. It still has the 520 byte stack item size limit in place.
+                        Today, 14 years after its deactivation, OP_CAT is still deactivated. While we can't ask Satoshi why he made this decision, 
+                        we can look at the current state of Bitcoin and its scripting language. The latest upgrade to Bitcoin was the Taproot upgrade 
+                        (which went into full effect in 2021), offering crucial enhancements to the Bitcoin protocol. While Taproot itself is a 
+                        broader upgrade improving Bitcoin's privacy and efficiency, it also introduced Tapscript, which specifically addresses 
+                        script execution and security. Among many things, it lifted the opcode limit per script and also lifted the overall 
+                        script size limit, enabling longer and more complex scripts. It still has the 520 byte stack item size limit in place.
                     </p>
                     <p>
-                        Let's upgrade to Taproot and re-revaluate our decisions. Click 'Upgrade to Taproot' to proceed.
+                        Let's upgrade to Taproot and re-evaluate our decisions. Click 'Upgrade to Taproot' to proceed.
                     </p>
                 </div>
                 <div class="button-container">
@@ -399,7 +403,7 @@
                     <p id="explanation-text">
                         While OP_CAT remains disabled in Bitcoin scripting, the Tapscript upgrade, with its 520-byte size limit, provides a framework that could reintroduce OP_CAT safely in the future.
                         <br><br>
-                        For demonstration, let's explore a simulated environment where you can use OP_CAT in conjunction with OP_DUP, without the risk of creating an oversized stack. Tapscript's size limit of 520 bytes is applied here to prevent excessive growth.
+                        For demonstration, let's explore a simulated environment where you can use OP_CAT in conjunction with OP_DUP without the risk of creating an oversized stack. Tapscript's size limit of 520 bytes is applied here to prevent excessive growth.
                         Furthermore, there are no restrictions to the number of opcodes per script.
                     </p>
                     <div class="stack-controls">
@@ -434,18 +438,19 @@
                 </div>
                 <div class="text-column">
                     <p>
-                        Let's reiterate. OP_CAT was deactivated in 2010. Likely due to security risks regarding memory and stack size issues. Yet, Satoshi already introduced
-                        useful mitigations to these risks in 2010. Fast forward 14 years and some of these measures are still in place, others have changed. We still
-                        have the 520 byte stack item size limit, but the opcode limit is gone. With Tapscript there is also no limit anymore on the size of scripts in general.
+                        Let's reiterate. OP_CAT was deactivated in 2010. This is likely due to security risks regarding memory and stack size issues. 
+                        Yet, Satoshi already introduced useful mitigations to these risks in 2010. Fast forward 14 years, and some of these measures 
+                        are still in place; others have changed. We still have the 520 byte stack item size limit, but the opcode limit is gone. With 
+                        Tapscript, there is also no longer any limit on the size of scripts in general.
                     </p>
                     <p>
-                        These changes allowed for the creation of Ordinals through the ability to create large transactions like inscribing a 3.92MB Taproot Wizard. Within these current
-                        rules, we can't really do any more harm with OP_CAT than we do with any other kind of transactions. At least in terms of transcation size.
+                        These changes allowed for the creation of Ordinals through the ability to create large transactions like inscribing a 3.92MB Taproot Wizard. 
+                        Within these current rules, we can't really do any more harm with OP_CAT than we do with any other kind of transaction, at least in terms of transaction size.
                     </p>
                     <p>
-                        So should OP_CAT be reactivated? Well this is up to all of us to decide. There are interesting advantages pointed out by
-                        proponents of OP_CAT. Examples include coventants (ability to restric the spending of tokens after you sent them), vaults (ways to better custody your bitcoin)
-                        post-quantum proof Bitcoin using Lamport Signatures and improved bridges for connecting Bitcoin layer 2 solutions.
+                        So, should OP_CAT be reactivated? Well, this is up to all of us to decide. Proponents of OP_CAT point out interesting advantages. 
+                        Examples include covenants (ability to restrict the spending of tokens after you sent them), vaults (ways to better custody your bitcoin), 
+                        post-quantum proof Bitcoin using Lamport Signatures, and improved bridges for connecting Bitcoin layer two solutions.
                     </p>
                 </div>
                 <div class="button-container">
