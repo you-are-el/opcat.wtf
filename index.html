@@ -7,17 +7,73 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 
+    ########################################################
+    # TASKBAR                                              #
+    ########################################################
+    -->
     <div class="taskbar">
-        <div class="start-button">
-            <a href="#"><button>Start</button></a>
+        <div class="taskbar-left">
+            <div class="start-button" onclick="toggleStartMenu()">
+                <a href="#"><button></button></a>
+            </div>
         </div>
-        <div class="taskbar-links">
-            <a href="resources.html">Resources</a>
-            <a href="about.html">About</a>
+        <div class="start-menu" id="startMenu">
+            <div class="menu-sidebar" id="windows-start-menu-image">
+              <span>Bitcoin</span>
+            </div>
+            <div class="menu-items">
+                <ul>
+                  <li>
+                    <a onclick="showWindow('about-window')">
+                      <img src="about.png" alt="About Icon">
+                      <span>About</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a onclick="showWindow('resources-window')">
+                      <img src="resources.png" alt="Resources Icon">
+                      <span>Resources</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a onclick="showWindow('opcat-window')">
+                      <img src="install.png" alt="OP_CAT Demo Icon">
+                      <span>OP_CAT Demo</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>              
+          </div>          
+        <div class="system-tray">
+            <img src="loudspeaker_on.png" alt="Sound" class="tray-icon" id="soundIcon">
+            <span class="time" id="clock">13:00</span>
         </div>
-    </div>   
+    </div>
+    
+    <!-- 
+    ########################################################
+    # Music Pop-Up                                         #
+    ########################################################
+    -->
+    <div id="firstUnmutePopup" class="window" style="position: absolute; left: 0; right: 0; margin: auto; top: 50%; transform: translateY(-50%); width: 300px; height: 150px; display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">OP_CAT Song</div>
+        </div>
+        <div class="window-body" style="text-align: center;">
+            <p>You are listening to OP_CAT by <a href="https://songaday.world/" target="_blank">Jonathan Mann</a></p>
+            <div style="margin-top: 20px;">
+                <button onclick="closeFirstUnmutePopup()">OK</button>
+            </div>
+        </div>
+    </div>    
 
-    <div class="window">
+    <!-- 
+    ########################################################
+    # OP_CAT Demo Window                                   #
+    ########################################################
+    -->
+    <div class="window" id="opcat-window">
         <div class="title-bar">
             <div class="title-bar-text">OP_CAT Setup Wizard</div>
         </div>
@@ -473,15 +529,89 @@
                         and how OP_CAT could be reintroduced in the future.
                     </p>
                     <p>Armed with this knowledge, you're now equipped to contribute meaningfully to the ongoing dialogue about Bitcoin's evolution.</p>
-                    <p>Click 'Finish' to end and restart the setup wizard.</p>
+                    <p>Click 'Finish' to end and restart the setup wizard (this will reload the whole website).</p>
                 </div>
                 <div class="button-container">
                     <button onclick="previousWindow()">&lt; Back</button>
                     <button onclick="reload_browser()">Finish</button>
                 </div>
-            </div>
-            
+            </div>    
+        </div>    
     </div>
+
+    <!-- 
+    ########################################################
+    # Resources Window                                   #
+    ########################################################
+    -->
+    <div class="window" id="resources-window">
+        <div class="title-bar">
+            <div class="title-bar-text">Resources about OP_CAT</div>
+        </div>
+        <div class="window-body">
+          <p>Here you can find resources about OP_CAT that have been used to create this website.</p>
+            <ul class="tree-view">
+                <li>
+                  <details open>
+                    <summary>Reading Material</summary>
+                    <ul>
+                      <li><a href="https://github.com/EthanHeilman/op_cat_draft/blob/main/cat.mediawiki" target="_blank">OP_CAT Draft by Ethan Heilman and Armin Sabouri</a></li>
+                    </ul>
+                  </details>
+                </li>
+                <li>
+                  <details open>
+                    <summary>Github Commits</summary>
+                    <ul>
+                      <li><a href="https://github.com/bitcoin/bitcoin/commit/757f0769d8360ea043f469f3a35f6ec204740446" target="_blank">Jul 29, 2010, Satoshi introduced stack item size limit of 5000 bytes</a></li>
+                      <li><a href="https://github.com/bitcoin/bitcoin/commit/6ff5f718b6a67797b2b3bab8905d607ad216ee21" target="_blank">Jul 31, 2010, Satoshi introduced a max number of 200 opcodes per script</a></li>
+                      <li><a href="https://github.com/bitcoin/bitcoin/commit/4bd188c4383d6e614e18f79dc337fbabe8464c82" target="_blank">Aug 15, 2010, Satoshi deactivates OP_CAT and sets the stack item size limit to 520 bytes</a></li>
+                    </ul>
+                  </details>
+                </li>
+                <li>
+                  <details open>
+                    <summary>Posts and Tweets</summary>
+                    <ul>
+                      <li><a href="https://twitter.com/peterktodd/status/672470100436496384" target="_blank">Peter Todd on OP_CAT in 2015</a></li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+        </div>
+    </div>
+
+    <!-- 
+    ########################################################
+    # About Window                                   #
+    ########################################################
+    -->
+    <div class="window" id="about-window">
+        <div class="title-bar">
+            <div class="title-bar-text">About</div>
+        </div>
+        <div class="window-body">
+            <div class="content-window">
+                <p><strong>About this project</strong></p>
+                <p>
+                    This project was developed during quest four of the Taproot Wizards. The purpose of this website is to educate people about the 
+                    <a href="https://github.com/EthanHeilman/op_cat_draft/blob/main/cat.mediawiki" target="_blank">proposal to bring OP_CAT back to Bitcoin</a>. 
+                    The website is being developed by <a href="https://twitter.com/you_are_el" target="_blank">@you_are_el</a>.
+                </p>
+                <p>The web experience presented on this website was inscribed on Bitcoin: a7e927ae46941d7ff3e15d9a21d1889a271fd14232f398a3f5d0276a9a712680i0 </p>
+                <p>#StayinAlive #OP_CAT_IS ALIVE</p>
+                <p><strong>Links</strong></p>
+                <ul>
+                    <li><a href="https://github.com/you-are-el/opcat.wtf" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://taprootwizards.com/" target="_blank">Taproot Wizards Website</a></li>
+                    <li><a href="https://twitter.com/TaprootWizards" target="_blank">Taproot Wizards on X</a></li>
+                    <li><a href="https://www.quantumcats.xyz/" target="_blank">Quantum Cats Website</a></li>
+                    <li><a href="https://twitter.com/QuantumCatsXYZ" target="_blank">Quantum Cats on X</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

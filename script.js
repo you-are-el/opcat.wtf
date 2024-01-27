@@ -18,6 +18,24 @@ function setVH() {
 window.addEventListener('resize', setVH);
 setVH();
 
+function showWindow(windowId) {
+    // List of all window IDs
+    var windowIds = ['opcat-window', 'resources-window', 'about-window'];
+
+    // Hide all windows
+    windowIds.forEach(function(id) {
+        var windowElement = document.getElementById(id);
+        if (windowElement) {
+            windowElement.style.display = 'none';
+        }
+    });
+
+    // Show the selected window
+    var selectedWindow = document.getElementById(windowId);
+    if (selectedWindow) {
+        selectedWindow.style.display = 'flex';
+    }
+}
 
 function nextWindow() {
     if (currentWindow < totalWindows) {
@@ -181,3 +199,73 @@ function startInstallation(event, popupId) {
 function reload_browser() {
     window.location.reload();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var soundIcon = document.getElementById('soundIcon');
+    var audio = new Audio('sound.mp3'); // Path to your mp3 file
+    audio.loop = true; // Set the audio to loop
+    var isAudioInitialized = false; // Flag to check if audio has been initialized
+    var isPlaying = false; // Track if audio is currently playing
+
+    // Set initial icon to sound off
+    soundIcon.src = 'loudspeaker_off.png';
+
+    soundIcon.onclick = function() {
+        if (!isAudioInitialized) {
+            // First click: Attempt to start playing the audio
+            audio.play().then(() => {
+                isAudioInitialized = true;
+                isPlaying = true;
+                soundIcon.src = 'loudspeaker_on.png';
+                showFirstUnmutePopup();
+            }).catch(error => {
+                console.error('Audio playback failed:', error);
+            });
+        } else {
+            if (isPlaying) {
+                audio.pause(); // Mute the sound
+                soundIcon.src = 'loudspeaker_off.png';
+                isPlaying = false;
+            } else {
+                audio.play(); // Unmute the sound
+                soundIcon.src = 'loudspeaker_on.png';
+                isPlaying = true;
+            }
+        }
+    };
+});
+
+function updateClock() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+
+    // Format time to display as two digits
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+
+    var timeString = hours + ':' + minutes;
+
+    document.getElementById('clock').textContent = timeString;
+}
+
+function toggleStartMenu() {
+    var startMenu = document.getElementById('startMenu');
+    startMenu.style.display = startMenu.style.display === 'block' ? 'none' : 'block';
+}
+
+function showFirstUnmutePopup() {
+    var popup = document.getElementById('firstUnmutePopup');
+    popup.style.display = 'block';
+}
+
+function closeFirstUnmutePopup() {
+    var popup = document.getElementById('firstUnmutePopup');
+    popup.style.display = 'none';
+}
+
+// Update the clock immediately and then every second
+updateClock();
+setInterval(updateClock, 1000);
+
+

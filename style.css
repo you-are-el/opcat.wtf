@@ -42,35 +42,152 @@ body {
 .taskbar {
     background-color: #c8c4c4;
     color: white;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     display: flex;
+    justify-content: space-between; 
     align-items: center;
     padding: 5px 10px;
     box-sizing: border-box;
 }
 
+.taskbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.taskbar::after {
+  content: '';
+  width: 2px;
+  height: calc(100% - 10px); /* Adjust height as needed */
+  position: absolute;
+  background: #f2f2f2;
+  box-shadow: 1px 1px 0 #818181;
+  left: calc(100px + 10px); /* Adjust this based on the width of your start button */
+  top: 50%;
+  transform: translateY(-50%); /* Center the divider vertically */
+}
+
 .start-button button {
-    background-color: #C0C0C0;
-    color: black;
-    border: none;
-    padding: 5px 10px;
-    margin-right: 20px;
-    font-family: 'MS Sans Serif', sans-serif;
-    cursor: pointer;
+  background: url('start_bitcoin.png') no-repeat center center; 
+  background-size: 50px 15px;
+  color: transparent;
+  border: none;
+  padding: 10px 20px; /* Adjust padding to match the height with taskbar-links */
+  cursor: pointer;
+  line-height: normal; /* Ensures that the line height does not affect the button height */
+}
+
+#startMenu {
+  display: none;
+}
+
+.start-menu {
+  font-family: Arial, sans-serif;
+  position: absolute;
+  left: 4px;
+  bottom: 39px; /* Adjust to the height of your taskbar */
+  background-color: #c0c0c0;
+  z-index: 10;
+  width: 250px; /* Adjust width as needed */
+  height: auto; /* Adjust height as needed */
+  display: flex;
+  box-shadow: -2px -2px #e0dede, -2px 0 #e0dede, 0 -2px #e0dede, -4px -4px white, -4px 0 white, 0 -4px white, 2px 2px #818181, 0 2px #818181, 2px 0 #818181, 2px -2px #e0dede, -2px 2px #818181, -4px 2px white, -4px 4px black, 4px 4px black, 4px 0 black, 0 4px black, 2px -4px white, 4px -4px black;
+}
+
+.menu-sidebar {
+  display: flex;
+  float: left;
+  background-color: #00037D; /* Dark blue sidebar */
+  color: white;
+  writing-mode: vertical-lr; /* Makes the text vertical */
+  transform: rotate(180deg); /* Flips the text direction */
+  padding: 5px;
+  height: 149px;
+  text-align: left;
+  flex: 0 0 10px; /* Adjust width of sidebar */
+}
+
+.menu-items {
+  flex: 1; /* Takes up the remaining space */
+}
+
+.start-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.start-menu ul li a {
+  display: flex; /* Aligns the img and text horizontally */
+  align-items: center; /* Centers them vertically */
+  color: black; /* Text color */
+  text-decoration: none;
+  padding: 2px 20px; /* Padding inside the link */
+  height: 49px;
+}
+
+.start-menu ul li a img {
+  margin-right: 10px; /* Spacing between icon and text */
+  height: 24px;
+}
+
+.start-menu ul li a span {
+  /* If you need additional styling for the text */
+}
+
+.start-menu ul li a:hover {
+  background-color: #00037D; /* Background color for the link on hover */
+  color: white; /* Text color for the link on hover */
+  cursor: pointer;
+}
+
+.taskbar-links {
+  display: flex; /* Aligns links in a row */
+  padding-left: 50px;
 }
 
 .taskbar-links a {
-    color: #000000;
-    text-decoration: none;
-    margin-right: 20px;
-    font-family: 'MS Sans Serif', sans-serif;
-    font-size: small;
+  color: #000000;
+  text-decoration: none;
+  margin-right: 5px;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: small;
+  padding: 5px 30px; /* Adjust padding to match the height with the start button */
+  box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+  display: flex; /* Aligns the text vertically */
+  align-items: center; /* Centers the text vertically */
+  justify-content: center; /* Centers the text horizontally */
 }
 
 .taskbar-links a:hover {
     text-decoration: underline;
+}
+
+/* Style the system tray */
+.system-tray {
+  display: flex;
+  align-items: center;
+  padding: 3px 20px;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+}
+
+.tray-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.time {
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: small;
+  color: #000000;
+  /* Additional styling if needed */
+}
+
+#resources-window, #about-window {
+  display: none;
 }
 
 .window {
